@@ -1,0 +1,414 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #0f0f0f;
+    color: white;
+    body {
+    padding-top: 70px; /* prevents overlap */
+}
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+*/
+
+nav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 15px;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.navbar ul {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+.navbar li {
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+    position: relative;
+}
+
+.navbar a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: orange;
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s;
+}
+
+.navbar a:hover::after {
+    width: 100%;
+}
+
+
+
+/* HERO */
+.hero {
+    height: 100vh;
+    background: linear-gradient(135deg, #000000, #1a1a2e);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gradient-text {
+    background: linear-gradient(45deg, orange, red);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.hero {
+    height: 100vh;
+    background: 
+        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+        url("https://images.unsplash.com/photo-1600891964599-f61ba0e24092");
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero button {
+    padding: 10px 20px;
+    background: orange;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.hero-bio {
+    max-width: 500px;
+    text-align: center;
+    margin-top: 10px;
+    opacity: 0.8;
+}
+
+/* MENU */
+.menu {
+    padding: 40px;
+    text-align: center;
+}
+
+.chef {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 50px;
+}
+
+.chef-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.chef img {
+    width: 220px;
+height: 220px;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 2px solid orange;
+    box-shadow: 0 0 15px rgba(255,165,0,0.5);
+}
+
+.chef-text {
+    max-width: 500px;
+}
+
+.food-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px;
+    scroll-behavior: smooth;
+}
+
+.food-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.food-container::-webkit-scrollbar-thumb {
+    background: orange;
+    border-radius: 10px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    width: 200px;
+    min-width: 200px; /* VERY IMPORTANT for horizontal scroll */
+}
+
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card {
+    transition: 0.4s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.hero h1 {
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px orange; }
+    to { text-shadow: 0 0 25px gold; }
+}
+
+/* CART */
+.cart {
+    padding: 40px;
+    text-align: center;
+}
+
+#cart div {
+    background: rgba(255,255,255,0.05);
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 10px;
+    width: 250px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.07);
+    padding: 10px 15px;
+    margin: 10px auto;
+    border-radius: 12px;
+    width: 280px;
+    backdrop-filter: blur(10px);
+}
+
+.cart-info h4 {
+    margin: 0;
+}
+
+.cart-controls button {
+    margin: 2px;
+}
+
+.cart-total {
+    margin-top: 20px;
+    color: gold;
+}
+
+button {
+    background: linear-gradient(45deg, orange, gold);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+    transition: 0.3s;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px orange;
+    background: orange;
+    color: white;
+}
+
+.whatsapp img {
+    width: 40px;
+    height: 40px;
+}
+
+.whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+
+.special {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(45deg, orange, red);
+    overflow: hidden; /* prevents overflow */
+}
+
+.special-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: inline-block;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.download-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: linear-gradient(45deg, orange, gold);
+    color: black;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.download-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px orange;
+}
+
+.gallery {
+    text-align: center;
+    padding: 40px;
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.gallery img {
+    width: 100%;
+    border-radius: 15px;
+    transition: 0.4s;
+}
+
+.gallery img:hover {
+    transform: scale(1.1) rotate(2deg);
+}
+
+.reservation {
+    text-align: center;
+    padding: 50px;
+}
+
+.reservation-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reservation input {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 250px;
+    border-radius: 8px;
+    border: none;
+}
+
+.reservation-form input,
+.reservation-form textarea {
+    width: 280px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+.reservation-form textarea {
+    height: 80px;
+}
+
+
+.reservation {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.reservation-box {
+    background: rgba(255,255,255,0.05);
+    padding: 30px;
+    border-radius: 20px;
+    width: 300px;
+    backdrop-filter: blur(10px);
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.6s;
+}
+
+.fade-in.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.calculator {
+    text-align: center;
+    padding: 40px;
+    background: rgba(255,255,255,0.05);
+    margin: 20px;
+    border-radius: 20px;
+}
+
+.calculator input {
+    width: 80%;
+    margin: 20px 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trust God Restaurant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <h1 class="gradient-text">Trust God Restaurant</h1>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#dishes">Our Dishes</a></li>
+            <li><a href="#reservation">Reservation</a></li>
+            <li><a href="#feedback">Feedback</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero">
+        <h1>🍽️ Trust God Restaurant</h1>
+        <p>Delicious food. Delivered fast.</p>
+
+        <p class="hero-bio">
+            At Trust God Restaurant, we serve authentic Ghanaian and continental
+            dishes made with fresh ingredients and unmatched passion. Whether it's
+            a quick lunch or a large event, we deliver quality, taste, and satisfaction.
+        </p>
+
+        <button onclick="scrollToMenu()">View Menu</button>
+    </section>
+
+    <section class="special fade-in">
+        <h2>🔥 Today’s Special</h2>
+        <p class="special-text">Waakye + Fish - GHS 25</p>
+    </section>
+
+    <!-- CHIEF -->
+    <section class="chef fade-in">
+        <div class="chef-container">
+            <img src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf">
+
+            <div class="chef-text">
+                <h2>👨‍🍳 Meet Our Head Chef</h2>
+
+                <p>
+                    Chef Boi is a passionate culinary expert with over a decade of
+                    experience in preparing authentic Ghanaian and continental dishes.
+                    His unique touch blends tradition with modern flavors, making every
+                    meal unforgettable.
+                </p>
+
+                <p>
+                    From daily specials to large-scale catering, Chef Boi ensures that
+                    every plate served meets the highest standards of taste, hygiene,
+                    and presentation. His goal is simple — to make every customer eat
+                    with joy and satisfaction.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu" class="menu">
+        <h2>Our Menu</h2>
+
+        <div class="food-container" id="menuScroll">
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d">
+                <h3>Jollof Rice</h3>
+                <p>GHS 30</p>
+                <button onclick="addToCart('Jollof Rice')">Add</button>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90">
+                <h3>Fried Rice</h3>
+                <p>GHS 35</p>
+                <button onclick="addToCart('Fried Rice')">Add</button>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
+                <h3>Banku & Tilapia</h3>
+                <p>GHS 50</p>
+                <button onclick="addToCart('Banku & Tilapia')">Add</button>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
+                <h3>Chicken & Chips</h3>
+                <p>GHS 45</p>
+                <button onclick="addToCart('Chicken & Chips')">Add</button>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb36">
+                <h3>Waakye Special</h3>
+                <p>GHS 25</p>
+                <button onclick="addToCart('Waakye Special')">Add</button>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2">
+                <h3>Fufu & Light Soup</h3>
+                <p>GHS 40</p>
+                <button onclick="addToCart('Fufu & Light Soup')">Add</button>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1605478371310-a9f1e96b4ff4">
+                <h3>Grilled Chicken</h3>
+                <p>GHS 55</p>
+                <button onclick="addToCart('Grilled Chicken')">Add</button>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947">
+                <h3>Pizza</h3>
+                <p>GHS 60</p>
+                <button onclick="addToCart('Pizza')">Add</button>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
+                <h3>Burger Combo</h3>
+                <p>GHS 45</p>
+                <button onclick="addToCart('Burger Combo')">Add</button>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1478145046317-39f10e56b5e9">
+                <h3>Spaghetti Bolognese</h3>
+                <p>GHS 38</p>
+                <button onclick="addToCart('Spaghetti')">Add</button>
+            </div>
+
+        </div>
+        <br>
+
+        <a href="menu.pdf" download class="download-btn">
+            📄 Download Full Menu
+        </a>
+    </section>
+
+    <!-- CART -->
+    <section class="cart">
+        <h2>Your Cart</h2>
+        <div id="cart"></div>
+
+        <input type="text" id="customerName" placeholder="Your Name">
+        <input type="tel" id="customerPhone" placeholder="Phone Number">
+        <input type="text" id="customerLocation" placeholder="Delivery Location">
+
+        <br><br>
+        <button onclick="placeOrder()">Place Order</button>
+
+        <button onclick="orderWhatsApp()">Order via WhatsApp</button>
+
+        <h2>📍 Track Your Order</h2>
+        <p id="orderStatus">No order yet</p>
+    </section>
+
+
+
+    <section class="calculator fade-in">
+        <h2>🍽️ Catering Calculator</h2>
+
+        <p>Number of Guests: <span id="guestCount">10</span></p>
+
+        <input type="range" min="10" max="200" value="10" id="guestSlider">
+
+        <h3 id="totalPrice">Total: GHS 300</h3>
+    </section>
+
+
+
+
+    <!-- GALLERY -->
+
+    <section id="dishes" class="gallery">
+        <h2>Our Dishes</h2>
+        <a href="dishes.html">
+            <div class="gallery-container">
+                <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d">
+                <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
+                <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
+            </div>
+            <section class="gallery fade-in"></section>
+        </a>
+    </section>
+
+
+    <!-- RESERVATION -->
+    <section id="reservation" class="reservation fade-in">
+        <div class="reservation-box">
+            <h2>Book a Table</h2>
+
+            <form>
+                <input type="text" placeholder="Full Name">
+                <input type="email" placeholder="Email">
+                <input type="tel" placeholder="Phone">
+
+                <div class="row">
+                    <input type="date">
+                    <input type="time">
+                </div>
+
+                <input type="number" placeholder="Guests">
+
+                <br>
+
+                <button type="submit">Reserve Now</button>
+            </form>
+        </div>
+    </section>
+
+
+
+
+    <a href="https://wa.me/233257245204" class="whatsapp" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+    </a>
+
+    <a href="https://wa.me/233XXXXXXXXX" target="_blank" class="whatsapp-float">
+        💬
+    </a>
+
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDPiYBi7_uCVsqpUBkdZ86O4zUec77LI0E",
+            authDomain: "trust-god-restaurant.firebaseapp.com",
+            projectId: "trust-god-restaurant",
+            storageBucket: "trust-god-restaurant.firebasestorage.app",
+            messagingSenderId: "1083875067829",
+            appId: "1:1083875067829:web:bf9cc4c935b20244e63bfc"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+
+    <script src="script.js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

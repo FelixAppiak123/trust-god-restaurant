@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>🔐 Admin Dashboard</h1>
+
+    <!-- LOGIN -->
+    <div id="login">
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" style="display:none;">
+        <h2>Add Food Item</h2>
+
+        <input type="text" id="foodName" placeholder="Food Name">
+        <input type="number" id="foodPrice" placeholder="Price">
+        <input type="text" id="foodImage" placeholder="Image URL">
+
+        <button onclick="addFood()">Add Food</button>
+
+        <h2>Food List</h2>
+        <div id="foodList"></div>
+    </div>
+
+    <h2>📦 Orders</h2>
+    <div id="ordersList"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDPiYBi7_uCVsqpUBkdZ86O4zUec77LI0E",
+            authDomain: "trust-god-restaurant.firebaseapp.com",
+            projectId: "trust-god-restaurant",
+            storageBucket: "trust-god-restaurant.firebasestorage.app",
+            messagingSenderId: "1083875067829",
+            appId: "1:1083875067829:web:bf9cc4c935b20244e63bfc"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+
+    <script src="admin.js"></script>
+
+
+
+</body>
+
+</html>
