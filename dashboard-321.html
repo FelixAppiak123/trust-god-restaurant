@@ -25,7 +25,7 @@
         </div>
 
         <div class="admin-grid">
-            <div class="admin-left">
+            <div class="admin-top">
                 <div class="panel">
                     <h2>Add / Edit Food</h2>
 
@@ -42,10 +42,29 @@
                 </div>
             </div>
 
-            <div class="admin-right">
+            <div class="admin-bottom">
                 <div class="panel">
                     <h2>📦 Orders</h2>
+                    <div style="margin-bottom:8px">
+                        <label for="orderSort">Sort:</label>
+                        <select id="orderSort" onchange="reloadOrders()">
+                            <option value="desc" selected>Newest first</option>
+                            <option value="asc">Oldest first</option>
+                        </select>
+                    </div>
                     <div id="ordersList"></div>
+                </div>
+
+                <div class="panel">
+                    <h2>📅 Reservations</h2>
+                    <div style="margin-bottom:8px">
+                        <label for="resSort">Sort:</label>
+                        <select id="resSort" onchange="reloadReservations()">
+                            <option value="desc" selected>Newest first</option>
+                            <option value="asc">Oldest first</option>
+                        </select>
+                    </div>
+                    <div id="reservationsList"></div>
                 </div>
             </div>
         </div>

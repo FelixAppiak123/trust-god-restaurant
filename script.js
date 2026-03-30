@@ -231,6 +231,7 @@ function placeOrder() {
         items: cart,
         total: totalPrice,
         time: new Date().toLocaleString(),
+        createdAt: new Date().toISOString(),
         status: "New"
     };
 
