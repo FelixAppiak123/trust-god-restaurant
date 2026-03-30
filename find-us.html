@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Find Us — Trust God Restaurant</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .find-hero{padding:80px 20px 40px;text-align:center}
+        .find-hero h1{font-size:2rem;margin-bottom:8px}
+        .find-grid{display:grid;grid-template-columns:1fr 480px;gap:24px;padding:20px 40px}
+        .contact-panel{display:flex;flex-direction:column;gap:12px}
+        .contact-row{display:flex;gap:12px;align-items:flex-start}
+        .contact-icon{width:44px;height:44px;border-radius:10px;background:linear-gradient(45deg,orange,gold);display:flex;align-items:center;justify-content:center;color:black;font-weight:bold}
+        .map-wrapper iframe{width:100%;height:100%;min-height:320px;border:0;border-radius:10px}
+        .panel .small{opacity:0.85;font-size:0.95rem}
+        @media(max-width:900px){.find-grid{grid-template-columns:1fr;padding:12px}.map-wrapper iframe{min-height:260px}}
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <h1 class="gradient-text">Trust God Restaurant</h1>
+        <div class="menu-toggle" onclick="window.location='index.html'">← Home</div>
+    </nav>
+
+    <main>
+        <section class="find-hero">
+            <h1>Find Us</h1>
+            <p class="small">Visit us — great food, warm hospitality. Below are our address, opening hours and a map to guide you.</p>
+        </section>
+
+        <section class="find-content">
+            <div class="find-grid">
+                <div class="panel contact-panel">
+                    <div>
+                        <h2>Trust God Restaurant</h2>
+                        <div class="small">Quality dishes prepared with care.</div>
+                    </div>
+
+                    <div class="contact-row">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <strong>Address</strong>
+                            <div class="small">No. 12 Example Street, Accra, Ghana</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-row">
+                        <div class="contact-icon">⏰</div>
+                        <div>
+                            <strong>Opening Hours</strong>
+                            <div class="small">Mon–Sat: 9:00 AM — 10:00 PM<br>Sun: 10:00 AM — 6:00 PM</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-row">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <strong>Phone</strong>
+                            <div class="small"><a href="tel:+233257245204">+233 257 245 204</a></div>
+                        </div>
+                    </div>
+
+                    <div class="contact-row">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <strong>Email</strong>
+                            <div class="small"><a href="mailto:info@trustgodrestaurant.com">info@trustgodrestaurant.com</a></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3>How to get here</h3>
+                        <div class="small">We're a short drive from the city center. Use the map to get directions.</div>
+                    </div>
+                </div>
+
+                <div class="panel map-wrapper">
+                    <!-- Replace the src with your restaurant's Google Maps embed URL -->
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.1234567890123!2d-0.1869631846999999!3d5.603717999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdfdfdfdfdfdf%3A0xfdfdfdfdfdfdf!2sAccra!5e0!3m2!1sen!2sgh!4v0000000000000"
+                        allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

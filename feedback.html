@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Feedback — Trust God Restaurant</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .feedback-hero{padding:80px 20px 20px;text-align:center}
+        .feedback-grid{display:grid;grid-template-columns:1fr 420px;gap:24px;padding:20px 40px}
+        .panel form{display:flex;flex-direction:column;gap:12px}
+        .panel input,.panel textarea{padding:10px;border-radius:8px;border:none}
+        .panel textarea{min-height:120px}
+        @media(max-width:900px){.feedback-grid{grid-template-columns:1fr;padding:12px}}
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <h1 class="gradient-text">Trust God Restaurant</h1>
+        <div class="menu-toggle" onclick="window.location='index.html'">← Home</div>
+    </nav>
+
+    <main>
+        <section class="feedback-hero">
+            <h1>Feedback</h1>
+            <p class="small">We value your feedback — tell us what you loved or what we can improve.</p>
+        </section>
+
+        <section class="find-content">
+            <div class="feedback-grid">
+                <div class="panel">
+                    <h2>Send Feedback</h2>
+                    <form id="feedbackForm">
+                        <input type="text" id="fbName" placeholder="Your name (optional)">
+                        <input type="email" id="fbEmail" placeholder="Email (optional)">
+                        <textarea id="fbMessage" placeholder="Write your feedback here..." required></textarea>
+                        <button type="submit">Send Feedback</button>
+                    </form>
+                </div>
+
+                <div class="panel">
+                    <h2>Other ways to reach us</h2>
+                    <p class="small">Call or message us on WhatsApp for quick responses.</p>
+                    <p><strong>Phone:</strong> <a href="tel:+233257245204">+233 257 245 204</a></p>
+                    <p><strong>WhatsApp:</strong> <a href="https://wa.me/233257245204" target="_blank">Chat</a></p>
+                    <p class="small">Thank you for helping us improve.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            // simple client-side success flow — integrate with Firestore/email service as needed
+            alert('Thanks for your feedback!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

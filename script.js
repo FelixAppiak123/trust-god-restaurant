@@ -1,12 +1,13 @@
 let cart = [];
 
-function addToCart(item) {
+function addToCart(item, price) {
+    // price expected as number
     let existing = cart.find(i => i.name === item);
 
     if (existing) {
         existing.qty++;
     } else {
-        cart.push({ name: item, qty: 1 });
+        cart.push({ name: item, qty: 1, price: Number(price) || 0 });
     }
 
     displayCart();
@@ -25,33 +26,37 @@ function changeQty(index, amount) {
 function displayCart() {
     let cartList = document.getElementById("cart");
     cartList.innerHTML = "";
-
     let totalItems = 0;
+    let totalPrice = 0;
 
     cart.forEach((item, index) => {
         let div = document.createElement("div");
         div.classList.add("cart-item");
 
+        let itemTotal = (item.price || 0) * item.qty;
+
         div.innerHTML = `
             <div class="cart-info">
                 <h4>${item.name}</h4>
-                <p>Quantity: ${item.qty}</p>
+                <p>Quantity: ${item.qty} &nbsp; • &nbsp; GHS ${item.price}</p>
             </div>
 
             <div class="cart-controls">
                 <button onclick="changeQty(${index}, 1)">+</button>
                 <button onclick="changeQty(${index}, -1)">-</button>
+                <div style="min-width:90px;text-align:right;padding-left:8px;">GHS ${itemTotal}</div>
             </div>
         `;
 
         cartList.appendChild(div);
 
         totalItems += item.qty;
+        totalPrice += itemTotal;
     });
 
     // TOTAL DISPLAY
     let total = document.createElement("h3");
-    total.textContent = "Total Items: " + totalItems;
+    total.textContent = "Total: GHS " + totalPrice;
     total.classList.add("cart-total");
 
     cartList.appendChild(total);
@@ -98,28 +103,35 @@ window.addEventListener("DOMContentLoaded", () => {
     scrollContainer = document.getElementById("menuScroll");
 
     function startAutoScroll() {
+        if (autoScroll) return; // already running
+
         autoScroll = setInterval(() => {
+            if (!scrollContainer) return;
 
-            scrollContainer.scrollLeft += scrollSpeed * direction;
+            // compute next position and clamp to bounds to avoid getting stuck
+            let next = scrollContainer.scrollLeft + scrollSpeed * direction;
+            const maxLeft = Math.max(0, scrollContainer.scrollWidth - scrollContainer.clientWidth);
 
-            // Bounce at right
-            if (
-                scrollContainer.scrollLeft + scrollContainer.clientWidth >= 
-                scrollContainer.scrollWidth
-            ) {
+            if (next >= maxLeft) {
+                next = maxLeft;
                 direction = -1;
             }
 
-            // Bounce at left
-            if (scrollContainer.scrollLeft <= 0) {
+            if (next <= 0) {
+                next = 0;
                 direction = 1;
             }
+
+            scrollContainer.scrollLeft = next;
 
         }, 20);
     }
 
     function stopAutoScroll() {
-        clearInterval(autoScroll);
+        if (autoScroll) {
+            clearInterval(autoScroll);
+            autoScroll = null;
+        }
     }
 
     // Start scrolling
@@ -159,7 +171,7 @@ function loadFoods() {
             <img src="${food.image}">
             <h3>${food.name}</h3>
             <p>GHS ${food.price}</p>
-            <button onclick="addToCart('${food.name}')">Add</button>
+            <button onclick="addToCart('${food.name}', ${food.price})">Add</button>
         `;
 
         container.appendChild(div);
@@ -182,7 +194,7 @@ function loadFoods() {
                 <img src="${food.image}">
                 <h3>${food.name}</h3>
                 <p>GHS ${food.price}</p>
-                <button onclick="addToCart('${food.name}')">Add</button>
+                <button onclick="addToCart('${food.name}', ${food.price})">Add</button>
             `;
 
             container.appendChild(div);
@@ -209,7 +221,7 @@ function placeOrder() {
     let totalPrice = 0;
 
     cart.forEach(item => {
-        totalPrice += item.price || 0;
+        totalPrice += (item.price || 0) * (item.qty || 1);
     });
 
     let order = {
@@ -289,6 +301,20 @@ function orderWhatsApp() {
 }
 
 
+function toggleMenu() {
+    document.querySelector(".nav-links").classList.toggle("active");
+}
+
+function toggleMenu() {
+    const nav = document.querySelector(".nav-links");
+    nav.classList.toggle("active");
+}
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+        document.querySelector(".nav-links").classList.remove("active");
+    });
+});
 
 // Run on load
 window.addEventListener("DOMContentLoaded", () => {

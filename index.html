@@ -12,13 +12,19 @@
 
     <nav class="navbar">
         <h1 class="gradient-text">Trust God Restaurant</h1>
-        <ul>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+
+        <ul class="nav-links">
+            <div class="close-menu" onclick="toggleMenu()">✖</div>
+
             <li><a href="#home">Home</a></li>
             <li><a href="#menu">Menu</a></li>
             <li><a href="#dishes">Our Dishes</a></li>
             <li><a href="#reservation">Reservation</a></li>
-            <li><a href="#feedback">Feedback</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="feedback.html">Feedback</a></li>
+            <li><a href="find-us.html">Find Us</a></li>
+            
         </ul>
     </nav>
 
@@ -76,70 +82,70 @@
                 <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d">
                 <h3>Jollof Rice</h3>
                 <p>GHS 30</p>
-                <button onclick="addToCart('Jollof Rice')">Add</button>
+                <button onclick="addToCart('Jollof Rice', 30)">Add</button>
             </div>
 
             <div class="card">
                 <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90">
                 <h3>Fried Rice</h3>
                 <p>GHS 35</p>
-                <button onclick="addToCart('Fried Rice')">Add</button>
+                <button onclick="addToCart('Fried Rice', 35)">Add</button>
             </div>
 
             <div class="card">
                 <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
                 <h3>Banku & Tilapia</h3>
                 <p>GHS 50</p>
-                <button onclick="addToCart('Banku & Tilapia')">Add</button>
+                <button onclick="addToCart('Banku & Tilapia', 50)">Add</button>
             </div>
 
             <div class="card">
                 <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
                 <h3>Chicken & Chips</h3>
                 <p>GHS 45</p>
-                <button onclick="addToCart('Chicken & Chips')">Add</button>
+                <button onclick="addToCart('Chicken & Chips', 45)">Add</button>
             </div>
 
             <div class="card">
                 <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb36">
                 <h3>Waakye Special</h3>
                 <p>GHS 25</p>
-                <button onclick="addToCart('Waakye Special')">Add</button>
+                <button onclick="addToCart('Waakye Special', 25)">Add</button>
             </div>
 
             <div class="card">
                 <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2">
                 <h3>Fufu & Light Soup</h3>
                 <p>GHS 40</p>
-                <button onclick="addToCart('Fufu & Light Soup')">Add</button>
+                <button onclick="addToCart('Fufu & Light Soup', 40)">Add</button>
             </div>
 
             <div class="card">
                 <img src="https://images.unsplash.com/photo-1605478371310-a9f1e96b4ff4">
                 <h3>Grilled Chicken</h3>
                 <p>GHS 55</p>
-                <button onclick="addToCart('Grilled Chicken')">Add</button>
+                <button onclick="addToCart('Grilled Chicken', 55)">Add</button>
             </div>
 
             <div class="card">
                 <img src="https://images.unsplash.com/photo-1544025162-d76694265947">
                 <h3>Pizza</h3>
                 <p>GHS 60</p>
-                <button onclick="addToCart('Pizza')">Add</button>
+                <button onclick="addToCart('Pizza', 60)">Add</button>
             </div>
 
             <div class="card">
                 <img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
                 <h3>Burger Combo</h3>
                 <p>GHS 45</p>
-                <button onclick="addToCart('Burger Combo')">Add</button>
+                <button onclick="addToCart('Burger Combo', 45)">Add</button>
             </div>
 
             <div class="card">
                 <img src="https://images.unsplash.com/photo-1478145046317-39f10e56b5e9">
                 <h3>Spaghetti Bolognese</h3>
                 <p>GHS 38</p>
-                <button onclick="addToCart('Spaghetti')">Add</button>
+                <button onclick="addToCart('Spaghetti Bolognese', 38)">Add</button>
             </div>
 
         </div>
@@ -202,21 +208,21 @@
     <!-- RESERVATION -->
     <section id="reservation" class="reservation fade-in">
         <div class="reservation-box">
-            <h2>Book a Table</h2>
+            <h2>Reservation</h2>
 
-            <form>
-                <input type="text" placeholder="Full Name">
-                <input type="email" placeholder="Email">
-                <input type="tel" placeholder="Phone">
+            <form id="reservationForm">
+                <input type="text" id="resName" placeholder="Full Name" required>
+                <input type="email" id="resEmail" placeholder="Email" required>
+                <input type="tel" id="resPhone" placeholder="Phone" required>
 
                 <div class="row">
-                    <input type="date">
-                    <input type="time">
+                    <input type="date" id="resDate" required>
+                    <input type="time" id="resTime" required>
                 </div>
 
-                <input type="number" placeholder="Guests">
+                <input type="number" id="resGuests" placeholder="Guests" min="1" value="2" required>
 
-                <br>
+                <textarea id="resNotes" placeholder="Special requests (optional)" rows="3"></textarea>
 
                 <button type="submit">Reserve Now</button>
             </form>
@@ -230,9 +236,7 @@
         <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
     </a>
 
-    <a href="https://wa.me/233XXXXXXXXX" target="_blank" class="whatsapp-float">
-        💬
-    </a>
+    
 
 
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
@@ -254,7 +258,38 @@
 
     <script src="script.js"></script>
 
-    <script src="script.js"></script>
+    <script>
+        // Reservation form: save to Firestore and show confirmation
+        const reservationForm = document.getElementById('reservationForm');
+        if (reservationForm) {
+            reservationForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const name = document.getElementById('resName').value.trim();
+                const email = document.getElementById('resEmail').value.trim();
+                const phone = document.getElementById('resPhone').value.trim();
+                const date = document.getElementById('resDate').value;
+                const time = document.getElementById('resTime').value;
+                const guests = Number(document.getElementById('resGuests').value) || 1;
+                const notes = document.getElementById('resNotes').value.trim();
+
+                if (!name || !email || !phone || !date || !time) {
+                    alert('Please fill all required fields.');
+                    return;
+                }
+
+                db.collection('reservations').add({
+                    name, email, phone, date, time, guests, notes, createdAt: new Date().toISOString()
+                }).then(() => {
+                    alert('Reservation requested — we will contact you to confirm.');
+                    reservationForm.reset();
+                }).catch(err => {
+                    console.error(err);
+                    alert('There was an error. Please try again later.');
+                });
+            });
+        }
+    </script>
 
 </body>
 

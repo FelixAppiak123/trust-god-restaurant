@@ -1,71 +1,129 @@
-// LOGIN SYSTEM
-function login() {
-    let user = document.getElementById("username").value;
-    let pass = document.getElementById("password").value;
+// ADMIN FUNCTIONS (compat Firebase)
 
-    if (user === "admin" && pass === "1234") {
-    document.getElementById("login").style.display = "none";
-    document.getElementById("dashboard").style.display = "block";
-    displayFoods();
-    loadOrders(); // load orders in real-time
-} else {
-        alert("Wrong login details");
+// LOGIN SYSTEM
+window.login = function () {
+    const email = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            document.getElementById("login").style.display = "none";
+            document.getElementById("dashboard").style.display = "block";
+            displayFoods();
+            loadOrders();
+        })
+        .catch((error) => {
+            alert("Login failed: " + error.message);
+        });
+};
+
+// auth state listener (compat)
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+        displayFoods();
+        loadOrders();
+    } else {
+        document.getElementById("login").style.display = "block";
+        document.getElementById("dashboard").style.display = "none";
     }
-}
+});
 
 // ADD FOOD TO FIREBASE
 function addFood() {
-    let name = document.getElementById("foodName").value;
-    let price = document.getElementById("foodPrice").value;
-    let image = document.getElementById("foodImage").value;
+    const name = document.getElementById("foodName").value;
+    const price = document.getElementById("foodPrice").value;
+    const image = document.getElementById("foodImage").value;
 
     db.collection("foods").add({
         name: name,
         price: price,
         image: image
     })
-    .then(() => {
-        alert("Food added successfully!");
-        displayFoods(); // refresh list
-    })
-    .catch((error) => {
-        console.error("Error:", error);
-    });
+        .then(() => {
+            alert("Food added successfully!");
+            displayFoods(); // refresh list
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
 }
 
 // DISPLAY FOOD FROM FIREBASE
+// DISPLAY FOOD FROM FIREBASE (real-time)
 function displayFoods() {
-    let list = document.getElementById("foodList");
+    const list = document.getElementById("foodList");
+    if (!list) return;
     list.innerHTML = "";
 
-    db.collection("foods").get().then(snapshot => {
+    db.collection("foods").onSnapshot(snapshot => {
+        list.innerHTML = "";
         snapshot.forEach(doc => {
-            let food = doc.data();
+            const food = doc.data();
+            const id = doc.id;
 
-            let div = document.createElement("div");
+            const item = document.createElement("div");
+            item.className = 'food-item';
 
-            div.innerHTML = `
-                <p>${food.name} - GHS ${food.price}</p>
+            item.innerHTML = `
+                <div class="food-info">
+                    <strong>${food.name}</strong>
+                    <div>GHS ${food.price}</div>
+                </div>
+                <div class="food-actions">
+                    <button onclick="editFood('${id}')">Edit</button>
+                    <button onclick="deleteFood('${id}')">Delete</button>
+                </div>
             `;
 
-            list.appendChild(div);
+            list.appendChild(item);
         });
-    });
+    }, err => console.error(err));
 }
 
+// Edit a food item (simple prompt-based editor)
+function editFood(foodId) {
+    db.collection('foods').doc(foodId).get().then(doc => {
+        if (!doc.exists) return alert('Food not found');
+        const food = doc.data();
+        const newName = prompt('Food name:', food.name);
+        if (newName === null) return; // cancelled
+        const newPrice = prompt('Price:', food.price);
+        if (newPrice === null) return;
+        const newImage = prompt('Image URL:', food.image || '');
+
+        db.collection('foods').doc(foodId).update({
+            name: newName,
+            price: Number(newPrice) || food.price,
+            image: newImage
+        }).then(() => {
+            // onSnapshot will update UI automatically
+        }).catch(err => console.error(err));
+    }).catch(err => console.error(err));
+}
+
+// Delete a food item
+function deleteFood(foodId) {
+    if (!confirm('Delete this food item?')) return;
+    db.collection('foods').doc(foodId).delete().catch(err => console.error(err));
+}
+
+// LOAD ORDERS
 function loadOrders() {
-    let container = document.getElementById("ordersList");
+    const container = document.getElementById("ordersList");
+    if (!container) return;
 
     db.collection("orders").onSnapshot(snapshot => {
         container.innerHTML = "";
 
         snapshot.forEach(doc => {
-            let order = doc.data();
-            let id = doc.id;
+            const order = doc.data();
+            const id = doc.id;
 
-            let itemsList = order.items.map(item => `<li>${item.name}</li>`).join("");
+            const itemsList = (order.items || []).map(item => `<li>${item.name}</li>`).join("");
 
-            let div = document.createElement("div");
+            const div = document.createElement("div");
 
             div.innerHTML = `
                 <h3>🧾 Order</h3>
@@ -88,17 +146,32 @@ function loadOrders() {
 
             container.appendChild(div);
         });
-    });
+    }, err => console.error(err));
 }
 
+// UPDATE ORDER STATUS
 function updateStatus(orderId, newStatus) {
     db.collection("orders").doc(orderId).update({
         status: newStatus
     })
-    .then(() => {
-        alert("Status updated!");
-    })
-    .catch((error) => {
-        console.error(error);
-    });
+        .then(() => {
+            alert("Status updated!");
+        })
+        .catch((error) => {
+            console.error(error);
+        });
 }
+
+// expose functions globally (optional)
+window.addFood = addFood;
+window.displayFoods = displayFoods;
+window.loadOrders = loadOrders;
+window.updateStatus = updateStatus;
+window.logout = function() {
+    firebase.auth().signOut()
+        .then(() => {
+            document.getElementById("login").style.display = "block";
+            document.getElementById("dashboard").style.display = "none";
+        })
+        .catch(err => console.error(err));
+};

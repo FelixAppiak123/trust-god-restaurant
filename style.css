@@ -1,18 +1,20 @@
 body {
     margin: 0;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     background: #0f0f0f;
     color: white;
-    body {
-    padding-top: 70px; /* prevents overlap */
+    padding-top: 80px; /* prevents overlap with fixed navbar */
 }
+
+section {
+    scroll-margin-top: 80px;
 }
 
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(10px);
     display: flex;
     justify-content: space-between;
@@ -21,10 +23,10 @@ body {
     z-index: 1000;
     box-sizing: border-box;
 }
-*/
+
 
 nav {
-    position: fixed;
+    position: relative;
     width: 100%;
     top: 0;
     background: rgba(0, 0, 0, 0.5);
@@ -68,6 +70,106 @@ nav {
     width: 100%;
 }
 
+/* Default */
+.nav-links {
+    display: flex;
+    position: static;
+    height: auto;
+    width: auto;
+    background: none;
+    flex-direction: row;
+    transform: none;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+
+.close-menu {
+    display: none;
+}
+
+
+/* Hide toggle on desktop */
+.menu-toggle {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        font-size: 30px;
+        color: white;
+        z-index: 1001;
+    }
+
+    /* Make mobile menu drop down below navbar instead of covering the whole page
+       Use max-height + overflow to fully collapse it when closed */
+    .nav-links {
+        position: absolute;
+        top: 60px; /* below navbar */
+        left: 0;
+        width: 100%;
+        max-height: 0; /* collapsed by default */
+        background: rgba(0, 0, 0, 0.95);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        gap: 25px;
+        padding: 0 12px; /* horizontal padding kept, vertical removed when collapsed */
+
+        transition: max-height 0.35s ease, padding-top 0.25s ease;
+        z-index: 999;
+        overflow: hidden; /* hide contents when collapsed */
+        box-sizing: border-box;
+    }
+
+    .nav-links.active {
+        max-height: calc(100vh - 60px);
+        padding-top: 12px; /* restore vertical padding when open */
+        overflow-y: auto;
+    }
+
+    .nav-links li a {
+        font-size: 22px;
+        color: orange;
+    }
+
+    nav h1 {
+        text-align: center;
+        width: 100%;
+        font-size: 20px;
+    }
+
+    .close-menu {
+        position: absolute;
+        display: none;
+        top: 20px;
+        right: 30px;
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+    }
+
+    .nav-links.active .close-menu {
+        display: block;
+    }
+
+    .nav-links.active~.menu-toggle {
+        display: none;
+    }
+
+}
+
 
 
 /* HERO */
@@ -90,8 +192,8 @@ nav {
 
 .hero {
     height: 100vh;
-    background: 
-        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
         url("https://images.unsplash.com/photo-1600891964599-f61ba0e24092");
     background-size: cover;
     background-position: center;
@@ -139,11 +241,11 @@ nav {
 
 .chef img {
     width: 220px;
-height: 220px;
+    height: 220px;
     object-fit: cover;
     border-radius: 20px;
     border: 2px solid orange;
-    box-shadow: 0 0 15px rgba(255,165,0,0.5);
+    box-shadow: 0 0 15px rgba(255, 165, 0, 0.5);
 }
 
 .chef-text {
@@ -173,7 +275,8 @@ height: 220px;
     border-radius: 15px;
     backdrop-filter: blur(10px);
     width: 200px;
-    min-width: 200px; /* VERY IMPORTANT for horizontal scroll */
+    min-width: 200px;
+    /* VERY IMPORTANT for horizontal scroll */
 }
 
 .card img {
@@ -192,7 +295,7 @@ height: 220px;
 
 .card:hover {
     transform: scale(1.05);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .hero h1 {
@@ -200,8 +303,13 @@ height: 220px;
 }
 
 @keyframes glow {
-    from { text-shadow: 0 0 10px orange; }
-    to { text-shadow: 0 0 25px gold; }
+    from {
+        text-shadow: 0 0 10px orange;
+    }
+
+    to {
+        text-shadow: 0 0 25px gold;
+    }
 }
 
 /* CART */
@@ -211,7 +319,7 @@ height: 220px;
 }
 
 #cart div {
-    background: rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.05);
     margin: 10px auto;
     padding: 10px;
     border-radius: 10px;
@@ -222,7 +330,7 @@ height: 220px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(255,255,255,0.07);
+    background: rgba(255, 255, 255, 0.07);
     padding: 10px 15px;
     margin: 10px auto;
     border-radius: 12px;
@@ -278,7 +386,8 @@ button:hover {
     text-align: center;
     padding: 30px;
     background: linear-gradient(45deg, orange, red);
-    overflow: hidden; /* prevents overflow */
+    overflow: hidden;
+    /* prevents overflow */
 }
 
 .special-text {
@@ -289,9 +398,17 @@ button:hover {
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 .download-btn {
@@ -373,12 +490,17 @@ button:hover {
 }
 
 .reservation-box {
-    background: rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.05);
     padding: 30px;
     border-radius: 20px;
     width: 300px;
     backdrop-filter: blur(10px);
 }
+
+.reservation-box h2{margin-top:0;margin-bottom:12px}
+.reservation-box input,.reservation-box textarea{display:block;width:100%;padding:10px;margin:8px 0;border-radius:8px;border:none;background:rgba(255,255,255,0.03);color:white}
+.reservation-box textarea{resize:vertical}
+.reservation-box button{width:100%;padding:12px;margin-top:8px}
 
 .row {
     display: flex;
@@ -399,7 +521,7 @@ button:hover {
 .calculator {
     text-align: center;
     padding: 40px;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.05);
     margin: 20px;
     border-radius: 20px;
 }
@@ -411,4 +533,95 @@ button:hover {
 
 html {
     scroll-behavior: smooth;
+}
+
+/* Mobile responsive tweaks */
+@media (max-width: 900px) {
+    .hero h1 { font-size: 1.8rem; }
+    .hero-bio { max-width: 90%; font-size: 0.95rem; }
+    .food-container { gap: 12px; padding: 12px; }
+    .card { width: 160px; min-width: 160px; }
+    .cart-item, #cart div { width: 95%; }
+    .reservation-box { width: 90%; }
+    button { padding: 10px 12px; }
+}
+
+@media (max-width: 600px) {
+    .hero { padding: 40px 12px; }
+    .hero h1 { font-size: 1.4rem; }
+    .menu, .gallery, .calculator { padding: 20px 12px; }
+
+    /* Make form inputs full-width on mobile */
+    input, textarea, select { width: 100%; box-sizing: border-box; }
+
+    /* Cart and reservation full width */
+    .cart, .reservation, .calculator { padding: 20px 12px; }
+
+    /* Admin layout stacks on mobile */
+    .admin-grid { grid-template-columns: 1fr; padding: 12px; }
+    .admin-header { padding: 12px; }
+    .panel { padding: 12px; }
+
+    /* Make action buttons easier to tap */
+    .food-actions button, button { width: 100%; margin: 6px 0; }
+
+    .food-container { overflow-x: auto; padding-bottom: 12px; }
+}
+
+/* Admin dashboard layout */
+.admin-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    padding:20px 40px;
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 24px;
+    padding: 20px 40px 60px 40px;
+}
+
+.admin-left, .admin-right {
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.panel {
+    background: rgba(255,255,255,0.04);
+    padding:16px;
+    border-radius:12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.panel h2 { margin-top:0; }
+
+.food-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px;
+    border-radius:8px;
+    background: rgba(255,255,255,0.02);
+    margin-bottom:8px;
+}
+
+.food-actions button{
+    margin-left:8px;
+    padding:6px 8px;
+    font-size:0.9rem;
+}
+
+.orders .order-card{
+    background: rgba(255,255,255,0.03);
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:10px;
+}
+
+@media(max-width:900px){
+    .admin-grid{grid-template-columns:1fr;}
 }
