@@ -1,4 +1,4 @@
-# 🍽️ Trust God Restaurant Web App
+# 🍽️ Food Station Web App
 
 A modern, mobile-first restaurant web application built to handle real-time orders, menu management, and customer interaction without relying on third-party delivery platforms.
 
